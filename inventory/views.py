@@ -2,5 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def home(request):
+    return render(request, "inventory/home.html")
 
-  return render(request, "inventory/home.html")
+def balancesheet(request):
+    return render(request, "inventory/balancesheet.html")
