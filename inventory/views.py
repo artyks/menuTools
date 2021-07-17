@@ -6,6 +6,8 @@ from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
 #import models
 from .models import MenuItem, Ingredient, Purchase, RecipeRequirement
+#import forms
+from .forms import  IngredientForm, MenuItemForm, PurchaseForm, RecipeRequirementForm 
 # Create your views here.
 # def home(request):
 #     return render(request, "inventory/home.html")
@@ -31,5 +33,7 @@ class Purchases(TemplateView):#template view for now, later ListView
 #   model = Line#update
 #   template_name = "inventory/add_menu_item.html"
 #   form_class = LineForm#update
-class CreateMenuItem(TemplateView):#template view for now, later ListView
+class CreateMenuItem(CreateView):#template view for now, later ListView
+    model = MenuItem
     template_name = "inventory/add_menu_item.html"
+    form_class = MenuItemForm
