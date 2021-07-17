@@ -19,9 +19,10 @@ class Ingredient(models.Model):
 class MenuItem(models.Model):
     title = models.CharField(max_length=20)
     price = models.FloatField(default=11.50)
-
+    def get_absolute_url(self):
+        return "/menu"
     def __str__(self):
-        return self.title
+        return f"{self.title}"
 
 class Purchase(models.Model):
     date = models.DateTimeField(auto_now=True)

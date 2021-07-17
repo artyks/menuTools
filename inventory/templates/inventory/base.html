@@ -3,12 +3,14 @@
 <head>
 	<meta charset="utf-8" />
     {% load static %}
-<link rel="stylesheet" href="{% static 'inventory/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'inventory/style.css' %}">
 	<title></title>
 </head>
 <body>
+<!-- <div class="app"> -->
     {% block content %}
     {% endblock %}
     <h3>LOGOUT BUTTON HERE(base)</h3>
+<!-- </div> -->
 </body>
 </html>
