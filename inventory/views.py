@@ -25,7 +25,11 @@ class Menu(ListView):#template view for now, later ListView
 class Purchases(TemplateView):#template view for now, later ListView
     template_name = "inventory/purchases.html"
 
+#===CLASSES FOR ADDING ITEMS, BASED ON FORMS===
 
-
-# def balancesheet(request):
-    # return render(request, "inventory/balancesheet.html")
+# class CreateMenuItem(CreateView):
+#   model = Line#update
+#   template_name = "inventory/add_menu_item.html"
+#   form_class = LineForm#update
+class CreateMenuItem(TemplateView):#template view for now, later ListView
+    template_name = "inventory/add_menu_item.html"

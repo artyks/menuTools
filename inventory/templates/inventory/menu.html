@@ -7,23 +7,23 @@
   <tr>
     <th>name</th>
     <th>price</th>
-    <th>actions</th>
   </tr>
 </thead>
 <tbody>
 {% for item in object_list %}
   <tr>
     <td>{{ item.title }}&nbsp;</td><td>{{ item.price }}&nbsp;</td>
-    <td><a href="#"
-        style="display: inherit; text-align: center; border-radius: 10px; text-decoration: none; color: #FFF; padding: 5px; background-color: #1B78FF;">update</a></td>
+
         {% endfor %}
 </tbody>
     </table>
-
+    <a href="{% url "add_menu_item" %}"
+        style="display: inherit; text-align: center; border-radius: 10px; text-decoration: none; color: #FFF; padding: 5px; background-color: #1B78FF;">add menu item</a></td>
 
 
 
 {% endblock %}
 
 <!-- save this anchor for later
-"{% url "update_menu_item" item.id %}" -->
+<!-- <td><a href="#"
+    style="display: inherit; text-align: center; border-radius: 10px; text-decoration: none; color: #FFF; padding: 5px; background-color: #1B78FF;">update</a></td> -->
