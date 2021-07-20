@@ -47,3 +47,8 @@ class UpdateIngredient(UpdateView):
     model = Ingredient
     template_name = "inventory/update_ingredient.html"
     form_class = IngredientUpdateForm
+
+class CreateRecipe(CreateView):
+    model = RecipeRequirement
+    template_name = "inventory/create_recipe.html"
+    form_class = RecipeRequirementForm
