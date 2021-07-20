@@ -1,12 +1,12 @@
 {% extends './base.html' %}
 {% block content %}
-<h2>Add a Menu Item</h2>
+<h2>update Ingredient</h2>
 <form method="post">
     {% csrf_token %}
   <div>
     {{ form.as_p }}
-    <input type="submit" value="add" />
-    <input type="button" value="back" onclick="history.back()">
+    <input type="submit" value="update" />
+    <input type="button" value="cancel" onclick="history.back()">
 
   </div>
 </form>

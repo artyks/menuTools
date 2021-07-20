@@ -3,7 +3,29 @@
 {{ block.super }}
 <h3>INVENTORY CONTENT HERE</h3>
 
-<p>(from inventory.html)</p>
+<table class="line-table">
+    <thead>
+<tr>
+<th>name</th>
+<th>unit</th>
+<th>quantity</th>
+<th>price</th>
+<th>update</th>
+</tr>
+</thead>
+<tbody>
+{% for item in object_list %}
+<tr>
+    <td>{{ item.name }}&nbsp;</td>
+    <td>{{ item.unit }}&nbsp;</td>
+    <td>{{ item.availableQuantity }}&nbsp;</td>
+    <td>{{ item.unitPrice }}&nbsp;</td>
+    <td><a href="{% url "update_ingredient" item.id %}">restock</a></td>
+{% endfor %}
+</tbody>
+</table>
+<a href="{% url "add_ingredient"  %}"
+    style="display: inherit; text-align: center; border-radius: 10px; text-decoration: none; color: #FFF; padding: 5px; background-color: #1B78FF;">add ingredient</a></td>
 
 
 

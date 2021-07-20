@@ -12,7 +12,8 @@ class Ingredient(models.Model):
     unit = models.CharField(max_length=2, choices=UNIT_CHOICES, default="oz")
     availableQuantity = models.IntegerField(default=10)
     unitPrice = models.FloatField(default=1.50)
-
+    def get_absolute_url(self):
+        return "/inventory"
     def __str__(self):
         return self.name
 
@@ -32,3 +33,5 @@ class RecipeRequirement(models.Model):
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    def __str__(self):
+        return f"{self.id}"

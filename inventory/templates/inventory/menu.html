@@ -5,6 +5,7 @@
     <table class="line-table">
         <thead>
   <tr>
+    <th>id</th>
     <th>name</th>
     <th>price</th>
   </tr>
@@ -12,7 +13,7 @@
 <tbody>
 {% for item in object_list %}
   <tr>
-    <td>{{ item.title }}&nbsp;</td><td>{{ item.price }}&nbsp;</td>
+    <td>{{ item.id }}&nbsp;</td><td>{{ item.title }}&nbsp;</td><td>{{ item.price }}&nbsp;</td>
 
         {% endfor %}
 </tbody>

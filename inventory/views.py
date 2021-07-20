@@ -7,7 +7,7 @@ from django.views.generic.edit import DeleteView
 #import models
 from .models import MenuItem, Ingredient, Purchase, RecipeRequirement
 #import forms
-from .forms import  IngredientForm, MenuItemForm, PurchaseForm, RecipeRequirementForm 
+from .forms import  IngredientForm, MenuItemForm, PurchaseForm, RecipeRequirementForm, IngredientUpdateForm
 # Create your views here.
 # def home(request):
 #     return render(request, "inventory/home.html")
@@ -17,23 +17,33 @@ class Home(TemplateView):#template view for now, later ListView
 class BalanceSheet(TemplateView):#template view for now, later ListView
     template_name = "inventory/balancesheet.html"
 
-class Inventory(TemplateView):#template view for now, later ListView
+class Inventory(ListView):#template view for now, later ListView
+    model = Ingredient
     template_name = "inventory/inventory.html"
 
-class Menu(ListView):#template view for now, later ListView
+class Menu(ListView):
     model = MenuItem
     template_name = "inventory/menu.html"
 
 class Purchases(TemplateView):#template view for now, later ListView
     template_name = "inventory/purchases.html"
 
-#===CLASSES FOR ADDING ITEMS, BASED ON FORMS===
+# class Recipe(ListView):
+#     model = RecipeRequirement
+#     template_name = "inventory/recipe.html"
 
-# class CreateMenuItem(CreateView):
-#   model = Line#update
-#   template_name = "inventory/add_menu_item.html"
-#   form_class = LineForm#update
-class CreateMenuItem(CreateView):#template view for now, later ListView
+#===CLASSES FOR ADDING OR UPDATING ITEMS, BASED ON FORMS===
+
+
+class CreateMenuItem(CreateView):
     model = MenuItem
     template_name = "inventory/add_menu_item.html"
     form_class = MenuItemForm
+class CreateIngredient(CreateView):
+    model = Ingredient
+    template_name = "inventory/add_ingredient.html"
+    form_class = IngredientForm
+class UpdateIngredient(UpdateView):
+    model = Ingredient
+    template_name = "inventory/update_ingredient.html"
+    form_class = IngredientUpdateForm
