@@ -25,6 +25,13 @@ class RecipeRequirementForm(forms.ModelForm):
         fields = "__all__"
 
 class IngredientUpdateForm(forms.ModelForm):
+    disabled_fields = ('name',)
+
     class Meta:
         model = Ingredient
-        fields = ["availableQuantity"]
+        fields = ["name", "availableQuantity"]
+
+    def __init__(self, *args, **kwargs):
+        super(IngredientUpdateForm, self).__init__(*args, **kwargs)
+        for field in self.disabled_fields:
+            self.fields[field].disabled = True
