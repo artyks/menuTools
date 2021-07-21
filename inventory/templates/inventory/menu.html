@@ -1,4 +1,7 @@
 {% extends './home.html' %}
+
+
+
 {% block content %}
 {{ block.super }}
 <h3>MENU CONTENT HERE</h3>
@@ -11,11 +14,22 @@
   </tr>
 </thead>
 <tbody>
-{% for item in object_list %}
+{% for item in menuitems %}
   <tr>
     <td>{{ item.id }}&nbsp;</td><td>{{ item.title }}&nbsp;</td><td>{{ item.price }}&nbsp;</td>
-
+    {% for row in item.reciperequirement_set.all %}
+    <tr>
+        <td>{{row.ingredient.name}} </td><td>qty {{row.quantity}} </td><td>cost {{ row.calculate_price }}</td>
+    </tr>
         {% endfor %}
+    <tr>
+        <td>total cost: </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+{% endfor %}
 </tbody>
     </table>
     <p>&nbsp;</p>

@@ -11,6 +11,7 @@ urlpatterns = [
     #===paths for views that edit/create ITEMS
     path('add_menu_item', views.CreateMenuItem.as_view(), name='add_menu_item'),
     path('add_ingredient', views.CreateIngredient.as_view(), name='add_ingredient'),
-    path('create_recipe', views.CreateRecipe.as_view(), name='create_recipe'),#without /<pk> this link shoul go to general create recipe form
+    path('create_recipe', views.CreateRecipe.as_view(), name='create_recipe'),
     path('inventory/<pk>/update/', views.UpdateIngredient.as_view(), name='update_ingredient'),
+
 ]

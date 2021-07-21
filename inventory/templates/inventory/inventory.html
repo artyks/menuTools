@@ -20,7 +20,7 @@
     <td>{{ item.unit }}&nbsp;</td>
     <td>{{ item.availableQuantity }}&nbsp;</td>
     <td>{{ item.unitPrice }}&nbsp;</td>
-    <td><a href="{% url "update_ingredient" item.id %}">restock</a></td>
+    <td><a href="{% url 'update_ingredient' item.id %}">restock</a></td>
 {% endfor %}
 </tbody>
 </table>
