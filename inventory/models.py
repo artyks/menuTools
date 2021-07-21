@@ -20,6 +20,15 @@ class Ingredient(models.Model):
 class MenuItem(models.Model):
     title = models.CharField(max_length=20)
     price = models.FloatField(default=11.50)
+    # ingredient_list = reciperequirement_set.all()
+
+    def sum_recipe_prices(self):
+        theTotalPrice = 7.0
+        theListOfIngredients = self.reciperequirement_set.all()
+        for ing in theListOfIngredients:
+            theTotalPrice += ing.calculate_price()
+        return theTotalPrice
+
     def get_absolute_url(self):
         return "/menu"
     def __str__(self):

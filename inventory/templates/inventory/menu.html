@@ -17,13 +17,16 @@
 {% for item in menuitems %}
   <tr>
     <td>{{ item.id }}&nbsp;</td><td>{{ item.title }}&nbsp;</td><td>{{ item.price }}&nbsp;</td>
+    <tr>
+        <td>&nbsp;</td><td>ingredients</td>
+    </tr>
     {% for row in item.reciperequirement_set.all %}
     <tr>
         <td>{{row.ingredient.name}} </td><td>qty {{row.quantity}} </td><td>cost {{ row.calculate_price }}</td>
     </tr>
         {% endfor %}
     <tr>
-        <td>total cost: </td>
+        <td>&nbsp;</td><td>&nbsp;</td><td>total cost: {{ item.sum_recipe_prices }}</td>
     </tr>
     <tr>
         <td>&nbsp;</td>

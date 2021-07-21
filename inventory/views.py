@@ -26,13 +26,17 @@ class Menu(ListView):
     template_name = "inventory/menu.html"
 
 
+
+
     def get_context_data(self):
         context = super().get_context_data()
         context["recreqs"] = RecipeRequirement.objects.all()
         context["menuitems"] = MenuItem.objects.all()
         context["ingredients"] = Ingredient.objects.all()
-        # context["ing_price"] = RecipeRequirement.calculate_price()
+        # context["pricesum"] = self.sum_recipe_prices()
         return context
+
+
 class Purchases(TemplateView):#template view for now, later ListView
     template_name = "inventory/purchases.html"
 
