@@ -2,9 +2,25 @@
 {% block content %}
 {{ block.super }}
 <h3>PURCHASES CONTENT HERE</h3>
+    <table class="line-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>menu item</th>
+                <th>date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in purchases %}
+            <tr>
+                <td>{{ item.id }}&nbsp;</td><td>{{ item.menuitem }}&nbsp;</td><td>{{ item.date }}&nbsp;</td>
+            <tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<p>&nbsp;</p>
 
-<p>(from purchases.html)</p>
-
-
+<a href="{% url "create_purchase"  %}"
+    style="display: inherit; text-align: center; border-radius: 10px; text-decoration: none; color: #FFF; padding: 5px; background-color: #1B78FF;">add purchase</a></td>
 
 {% endblock %}

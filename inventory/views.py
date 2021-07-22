@@ -25,9 +25,6 @@ class Menu(ListView):
     model = MenuItem
     template_name = "inventory/menu.html"
 
-
-
-
     def get_context_data(self):
         context = super().get_context_data()
         context["recreqs"] = RecipeRequirement.objects.all()
@@ -37,10 +34,14 @@ class Menu(ListView):
         return context
 
 
-class Purchases(TemplateView):#template view for now, later ListView
+class Purchases(ListView):
+    model = Purchase
     template_name = "inventory/purchases.html"
 
-
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["purchases"] = Purchase.objects.all()
+        return context
 #===CLASSES FOR ADDING OR UPDATING ITEMS, BASED ON FORMS===
 
 
@@ -61,3 +62,8 @@ class CreateRecipe(CreateView):
     model = RecipeRequirement
     template_name = "inventory/create_recipe.html"
     form_class = RecipeRequirementForm
+
+class CreatePurchase(CreateView):
+    model = Purchase
+    template_name = "inventory/create_purchase.html"
+    form_class = PurchaseForm

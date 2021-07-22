@@ -23,7 +23,7 @@ class MenuItem(models.Model):
     # ingredient_list = reciperequirement_set.all()
 
     def sum_recipe_prices(self):
-        theTotalPrice = 7.0
+        theTotalPrice = 0.0
         theListOfIngredients = self.reciperequirement_set.all()
         for ing in theListOfIngredients:
             theTotalPrice += ing.calculate_price()
@@ -35,22 +35,31 @@ class MenuItem(models.Model):
         return f"{self.title}"
 
 class Purchase(models.Model):
-    date = models.DateTimeField(auto_now=True)
+    date = models.DateField(auto_now=True)
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return "/purchases"
+    def __str__(self):
+        return f"{self.menuitem} {self.date}"
+    #try function to delete ingredients based on menuitem here first
+    def deplete_ingredients(self):
+        pass
+        #theListOfIngredients = self.menuitem.reciperequirement_set.all()
+            # for ing in theListOfIngredients:
+            #     remove quantity from inventory
 
 class RecipeRequirement(models.Model):
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     ingredient_cost = models.FloatField(editable=False, default=0.0)#this gets set by the method below, not on a form
-#-------
-    def calculate_price(self):
 
+    def calculate_price(self):
         this_cost = self.ingredient.unitPrice * self.quantity
         # self.ingredient_cost = this_cost
         return this_cost
 
-#-------
     def get_absolute_url(self):
         return "/menu"
     def __str__(self):
