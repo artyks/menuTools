@@ -20,13 +20,12 @@ class Ingredient(models.Model):
 class MenuItem(models.Model):
     title = models.CharField(max_length=20)
     price = models.FloatField(default=11.50)
-    # ingredient_list = reciperequirement_set.all()
 
-    def sum_recipe_prices(self):
+    def sum_recipe_prices(self):#this totals the ingredient COST of each menu item, not the price.
         theTotalPrice = 0.0
         theListOfIngredients = self.reciperequirement_set.all()
         for ing in theListOfIngredients:
-            theTotalPrice += ing.calculate_price()
+            theTotalPrice += ing.ingredient_cost
         return theTotalPrice
 
     def get_absolute_url(self):
@@ -41,24 +40,15 @@ class Purchase(models.Model):
     def get_absolute_url(self):
         return "/purchases"
     def __str__(self):
-        return f"{self.menuitem} {self.date}"
-    #try function to delete ingredients based on menuitem here first
-    def deplete_ingredients(self):
-        pass
-        #theListOfIngredients = self.menuitem.reciperequirement_set.all()
-            # for ing in theListOfIngredients:
-            #     remove quantity from inventory
+        return f"{self.id} {self.menuitem} {self.date}"
 
 class RecipeRequirement(models.Model):
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
-    ingredient_cost = models.FloatField(editable=False, default=0.0)#this gets set by the method below, not on a form
-
-    def calculate_price(self):
-        this_cost = self.ingredient.unitPrice * self.quantity
-        # self.ingredient_cost = this_cost
-        return this_cost
+    @property#calculate cost of ingredient amount used in recipe
+    def ingredient_cost(self):
+        return self.ingredient.unitPrice * self.quantity
 
     def get_absolute_url(self):
         return "/menu"

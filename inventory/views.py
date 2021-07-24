@@ -14,8 +14,31 @@ from .forms import  IngredientForm, MenuItemForm, PurchaseForm, RecipeRequiremen
 class Home(TemplateView):
     template_name = "inventory/home.html"#soon this template gets replaced with balancesheet.html
 
-class BalanceSheet(TemplateView):#template view for now, later ListView
+class BalanceSheet(TemplateView):
     template_name = "inventory/balancesheet.html"
+
+    @property#calculate total cost of all ingredients in all items sold
+    def total_purchases_cost(self):
+        total_cost = 0.0
+        all_PO = Purchase.objects.all()
+        for this_PO in all_PO:
+            total_cost += this_PO.menuitem.sum_recipe_prices()
+        return total_cost
+
+    @property#calculate total price off all menu items sold
+    def total_sales_price(self):
+        total_price = 0.0
+        all_PO = Purchase.objects.all()
+        for this_PO in all_PO:
+            total_price += this_PO.menuitem.price
+        return total_price
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["totalcost"] = self.total_purchases_cost
+        context["totalsales"] = self.total_sales_price
+        context["profitorloss"] = self.total_sales_price - self.total_purchases_cost
+        return context
 
 class Inventory(ListView):
     model = Ingredient

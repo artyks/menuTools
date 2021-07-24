@@ -19,7 +19,7 @@
     </tr>
     {% for row in item.reciperequirement_set.all %}
     <tr>
-        <td>{{row.ingredient.name}} </td><td>qty {{row.quantity}} </td><td>cost {{ row.calculate_price }}</td>
+        <td>{{row.ingredient.name}} </td><td>qty {{row.quantity}} </td><td>cost {{ row.ingredient_cost }}</td>
     </tr>
         {% endfor %}
     <tr>
