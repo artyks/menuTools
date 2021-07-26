@@ -3,7 +3,7 @@
 <h2>update Ingredient {{ view.kwargs.pk }}</h2>
 <form method="post">
     {% csrf_token %}
-  <div>
+  <div class="actionpanel">
     {{ form.as_p }}
     <input type="submit" value="update" />
     <input type="button" value="cancel" onclick="history.back()">

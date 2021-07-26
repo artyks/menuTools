@@ -1,13 +1,13 @@
 {% extends './base.html' %}
 {% block content %}
 <nav class="navbar">
-<a class="nav-item" href="{% url 'balancesheet' %}"><h3>BALANCE SHEET</h3></a>
-<a class="nav-item" href="{% url 'menu' %}"><h3>MENU ITEMS</h3></a>
-<a class="nav-item" href="{% url 'inventory' %}"><h3>INVENTORY</h3></a>
-<a class="nav-item" href="{% url 'purchases' %}"><h3>PURCHASES</h3></a>
+<a href="{% url 'balancesheet' %}"><h3>BALANCE SHEET</h3></a>
+<a href="{% url 'menu' %}"><h3>MENU ITEMS</h3></a>
+<a href="{% url 'inventory' %}"><h3>INVENTORY</h3></a>
+<a href="{% url 'purchases' %}"><h3>PURCHASES</h3></a>
 </nav>
 
-
+<!-- <a class="nav-item" href="{% url 'balancesheet' %}"><h3>BALANCE SHEET</h3></a> -->
 
 {{ block.super }}
 {% endblock %}

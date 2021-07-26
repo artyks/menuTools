@@ -3,7 +3,7 @@
 <h2>Add Purchase</h2>
 <form method="post">
     {% csrf_token %}
-  <div>
+  <div class="actionpanel">
     {{ form.as_p }}
     <input type="submit" value="add" />
     <input type="button" value="back" onclick="history.back()">
