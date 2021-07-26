@@ -1,9 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
 
     path('', views.Home.as_view(), name='home'),#this path won't be used after dev. home.html is not a complete page. the actual home page destination is balancesheet.html
+    path("accounts/", include("django.contrib.auth.urls"), name="login"),#VERIFY
     path('balancesheet', views.BalanceSheet.as_view(), name='balancesheet'),
     path('menu', views.Menu.as_view(), name='menu'),
     path('inventory', views.Inventory.as_view(), name='inventory'),
@@ -15,5 +16,6 @@ urlpatterns = [
     path('create_purchase', views.CreatePurchase.as_view(), name='create_purchase'),
     path('inventory/<pk>/update/', views.UpdateIngredient.as_view(), name='update_ingredient'),
     path('purchase/<pk>/confirm', views.confirmPurchase.as_view(), name='confirm_purchase'),
+    path("logout/", views.logout_view, name="logout"),#VERIFY
 
 ]

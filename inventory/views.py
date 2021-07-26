@@ -1,20 +1,39 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.views.generic import ListView
-from django.views.generic.edit import CreateView
-from django.views.generic.edit import UpdateView
-from django.views.generic.edit import DeleteView
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin#for class views, add parameter to function call
+from django.contrib.auth.decorators import login_required#for function views. prepend function def with @login_required on line above
+from django.contrib.auth import logout
+# from django.urls import reverse_lazy
+
 #import models
 from .models import MenuItem, Ingredient, Purchase, RecipeRequirement
 #import forms
 from .forms import  IngredientForm, MenuItemForm, PurchaseForm, RecipeRequirementForm, IngredientUpdateForm
 # Create your views here.
-# def home(request):
-#     return render(request, "inventory/home.html")
-class Home(TemplateView):
+#i guessi dont need this view=======
+# def login_view(request):
+#     context = {
+#     "login_view": "active"
+#     }
+#     if request.method == "POST":
+#         username = request.POST["username"]
+#         password = request.POST["password"]
+#         user = authenticate(request, username=username, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect("balancesheet")#VERIFY
+#         else:
+#             return HttpResponse("invalid credentials")
+#     return render(request, "registration/login.html", context)
+#===========
+class Home(LoginRequiredMixin, TemplateView):
     template_name = "inventory/home.html"#soon this template gets replaced with balancesheet.html
 
-class BalanceSheet(TemplateView):
+
+class BalanceSheet(LoginRequiredMixin, TemplateView):
     template_name = "inventory/balancesheet.html"
 
     @property#calculate total cost of all ingredients in all items sold
@@ -40,11 +59,11 @@ class BalanceSheet(TemplateView):
         context["profitorloss"] = self.total_sales_price - self.total_purchases_cost
         return context
 
-class Inventory(ListView):
+class Inventory(LoginRequiredMixin, ListView):
     model = Ingredient
     template_name = "inventory/inventory.html"
 
-class Menu(ListView):
+class Menu(LoginRequiredMixin, ListView):
     model = MenuItem
     template_name = "inventory/menu.html"
 
@@ -57,7 +76,7 @@ class Menu(ListView):
         return context
 
 
-class Purchases(ListView):
+class Purchases(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = "inventory/purchases.html"
 
@@ -68,30 +87,30 @@ class Purchases(ListView):
 #===CLASSES FOR ADDING OR UPDATING ITEMS, BASED ON FORMS===
 
 
-class CreateMenuItem(CreateView):
+class CreateMenuItem(LoginRequiredMixin, CreateView):
     model = MenuItem
     template_name = "inventory/add_menu_item.html"
     form_class = MenuItemForm
-class CreateIngredient(CreateView):
+class CreateIngredient(LoginRequiredMixin, CreateView):
     model = Ingredient
     template_name = "inventory/add_ingredient.html"
     form_class = IngredientForm
-class UpdateIngredient(UpdateView):
+class UpdateIngredient(LoginRequiredMixin, UpdateView):
     model = Ingredient
     template_name = "inventory/update_ingredient.html"
     form_class = IngredientUpdateForm
 
-class CreateRecipe(CreateView):
+class CreateRecipe(LoginRequiredMixin, CreateView):
     model = RecipeRequirement
     template_name = "inventory/create_recipe.html"
     form_class = RecipeRequirementForm
 
-class CreatePurchase(CreateView):
+class CreatePurchase(LoginRequiredMixin, CreateView):
     model = Purchase
     template_name = "inventory/create_purchase.html"
     form_class = PurchaseForm
 
-class confirmPurchase(ListView):
+class confirmPurchase(LoginRequiredMixin, ListView):
     template_name = "inventory/confirm_purchase.html"
     model = Purchase
     # thisPO = Purchase.objects.get(id=self.kwargs['pk'])
@@ -110,7 +129,7 @@ class confirmPurchase(ListView):
             ING_TAR = Ingredient.objects.get(name=thisINname)
             ING_TAR.availableQuantity -= thisQTY
             ING_TAR.save()
-        # return "thisPI"
 
-
-#maybe get context and call deplete function here after pasting it back in purchase model
+def logout_view(request):
+  logout(request)
+  return redirect("balancesheet")#VERIFY maybe it redirects to "home"
