@@ -38,9 +38,12 @@ class Purchase(models.Model):
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        return "/purchases"
+        return f"/purchase/{self.id}/confirm"
     def __str__(self):
         return f"{self.id} {self.menuitem} {self.date}"
+        #define quantity of each ingredient needed: menuitem.REcReq_set(all).quantyty
+        #define how much of each ingredient is available: menuitem.REcReq.availableQuantity
+
 
 class RecipeRequirement(models.Model):
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)

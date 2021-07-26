@@ -90,3 +90,27 @@ class CreatePurchase(CreateView):
     model = Purchase
     template_name = "inventory/create_purchase.html"
     form_class = PurchaseForm
+
+class confirmPurchase(ListView):
+    template_name = "inventory/confirm_purchase.html"
+    model = Purchase
+    # thisPO = Purchase.objects.get(id=self.kwargs['pk'])
+    def get_context_data(self):
+        context = super().get_context_data()
+        context["purchase"] = Purchase.objects.get(id=self.kwargs['pk'])
+        context["depleteinventory"] = self.deplete_inventory
+        return context
+    @property
+    def deplete_inventory(self):
+        thisPI = Purchase.objects.get(id=self.kwargs['pk'])
+        rrSet = thisPI.menuitem.reciperequirement_set.all()
+        for thisRR in rrSet:
+            thisINname = thisRR.ingredient.name
+            thisQTY = thisRR.quantity
+            ING_TAR = Ingredient.objects.get(name=thisINname)
+            ING_TAR.availableQuantity -= thisQTY
+            ING_TAR.save()
+        # return "thisPI"
+
+
+#maybe get context and call deplete function here after pasting it back in purchase model

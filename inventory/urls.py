@@ -14,5 +14,6 @@ urlpatterns = [
     path('create_recipe', views.CreateRecipe.as_view(), name='create_recipe'),
     path('create_purchase', views.CreatePurchase.as_view(), name='create_purchase'),
     path('inventory/<pk>/update/', views.UpdateIngredient.as_view(), name='update_ingredient'),
+    path('purchase/<pk>/confirm', views.confirmPurchase.as_view(), name='confirm_purchase'),
 
 ]

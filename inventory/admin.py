@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
 from .models import Ingredient
 from .models import MenuItem
 from .models import Purchase
 from .models import RecipeRequirement
+# Register your models here.
 
 admin.site.register(Ingredient)
 admin.site.register(MenuItem)
