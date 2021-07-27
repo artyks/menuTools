@@ -1,26 +1,26 @@
 {% extends './home.html' %}
 {% block content %}
 {{ block.super }}
-<!-- <h3>INVENTORY CONTENT HERE</h3> -->
+<h3>INVENTORY</h3>
 
-<table class="line-table">
+<table class="button-table">
     <thead>
 <tr>
-<th>name</th>
-<th>unit</th>
+<th>name&nbsp;</th>
+<th>units&nbsp;</th>
 <th>quantity</th>
 <th>price</th>
-<th>update</th>
+<th></th>
 </tr>
 </thead>
 <tbody>
 {% for item in object_list %}
 <tr>
-    <td>{{ item.name }}&nbsp;</td>
-    <td>{{ item.unit }}&nbsp;</td>
-    <td>{{ item.availableQuantity }}&nbsp;</td>
-    <td>{{ item.unitPrice }}&nbsp;</td>
-    <td><a href="{% url 'update_ingredient' item.id %}">restock</a></td>
+    <td>{{item.name}}</td>
+    <td>{{item.unit}}s</td>
+    <td>{{item.availableQuantity}}</td>
+    <td>${{item.unitPrice}}</td>
+    <td class = "tinybutton"><a href="{% url 'update_ingredient' item.id %}">restock</a></td>
 {% endfor %}
 </tbody>
 </table>

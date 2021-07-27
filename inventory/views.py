@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin#for class views, add p
 from django.contrib.auth.decorators import login_required#for function views. prepend function def with @login_required on line above
 from django.contrib.auth import logout
 # from django.urls import reverse_lazy
-
+from decimal import *
 #import models
 from .models import MenuItem, Ingredient, Purchase, RecipeRequirement
 #import forms
@@ -38,7 +38,7 @@ class BalanceSheet(LoginRequiredMixin, TemplateView):
 
     @property#calculate total cost of all ingredients in all items sold
     def total_purchases_cost(self):
-        total_cost = 0.0
+        total_cost = Decimal(0.00)
         all_PO = Purchase.objects.all()
         for this_PO in all_PO:
             total_cost += this_PO.menuitem.sum_recipe_prices()
@@ -46,7 +46,7 @@ class BalanceSheet(LoginRequiredMixin, TemplateView):
 
     @property#calculate total price off all menu items sold
     def total_sales_price(self):
-        total_price = 0.0
+        total_price = Decimal(0.00)
         all_PO = Purchase.objects.all()
         for this_PO in all_PO:
             total_price += this_PO.menuitem.price

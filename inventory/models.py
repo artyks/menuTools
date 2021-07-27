@@ -1,5 +1,5 @@
 from django.db import models
-
+from decimal import *
 # Create your models here.
 class Ingredient(models.Model):
     OUNCE = 'oz'
@@ -11,7 +11,8 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=20)
     unit = models.CharField(max_length=2, choices=UNIT_CHOICES, default="oz")
     availableQuantity = models.IntegerField(default=10)
-    unitPrice = models.FloatField(default=1.50)
+    unitPrice = models.DecimalField(max_digits=10, decimal_places=2)
+
     def get_absolute_url(self):
         return "/inventory"
     def __str__(self):
@@ -19,10 +20,10 @@ class Ingredient(models.Model):
 
 class MenuItem(models.Model):
     title = models.CharField(max_length=20)
-    price = models.FloatField(default=11.50)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=11.50)
 
     def sum_recipe_prices(self):#this totals the ingredient COST of each menu item, not the price.
-        theTotalPrice = 0.0
+        theTotalPrice = Decimal(0.00)
         theListOfIngredients = self.reciperequirement_set.all()
         for ing in theListOfIngredients:
             theTotalPrice += ing.ingredient_cost
@@ -48,7 +49,7 @@ class Purchase(models.Model):
 class RecipeRequirement(models.Model):
     menuitem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+    quantity = models.DecimalField(max_digits=3, decimal_places=0, default=1)
     @property#calculate cost of ingredient amount used in recipe
     def ingredient_cost(self):
         return self.ingredient.unitPrice * self.quantity

@@ -8,8 +8,12 @@
 </head>
 <body>
 <div class="app">
+    <img src="{% static 'inventory/DJD_masthead.png' %}" alt="DJD logo">
     {% block content %}
     {% endblock %}
+    <div class="logout">
+        <a href="{% url "logout"  %}">logout</a>
+    </div>
 
 </div>
 </body>

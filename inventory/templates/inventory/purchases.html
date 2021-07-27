@@ -14,9 +14,9 @@
         <tbody>
             {% for item in purchases %}
             <tr>
-                <td>{{ item.id }}&nbsp;</td><td>{{ item.menuitem }}&nbsp;</td>
-                <td>{{ item.date }}&nbsp;</td>
-                <td>{{ item.menuitem.sum_recipe_prices }}</td>
+                <td>{{item.id}}</td><td>{{item.menuitem}}</td>
+                <td>{{item.date}}</td>
+                <td>${{item.menuitem.sum_recipe_prices}}</td>
             <tr>
             {% endfor %}
         </tbody>
@@ -25,6 +25,6 @@
 <div class="actionpanel">
 
 
-<a href="{% url "create_purchase"  %}">add purchase</a></td>
+<a href="{% url "create_purchase"  %}">add purchase</a>
 </div>
 {% endblock %}

@@ -1,85 +1,70 @@
-body {
-  font-family: "Oxygen", sans-serif;
-
-  text-align: center;
-margin: 0 20px 0 20px;
+form.login {
+    max-width: 50%;
+    margin: 0 auto;
 }
 
-input,
-select {
-  width: 100%;
-  /* padding: 12px 20px; */
-  padding: 5px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  /* border: 1px solid black; */
-  border-radius: 10px;
-  color: #FFF;
-  /* text-align: center; */
-  background-color: #1B78FF;
+body {
+    font-family: "Oxygen", sans-serif;
+    text-align: center;
+    margin: 0 20px 0 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 5px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    color: #FFF;
+    background-color: #5F73B8;
 }
 
 hr {
     height: 0.2em;
-    background: #1B78FF;
-}
-
-header {
-  background-color: #fff5ff;
-  min-height: 200px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 40px;
-  padding-top: 40px;
-}
-
-.header-first-row {
-  width: 100%;
-  display: flex;
+    background: #5F73B8;
 }
 
 .navbar {
-  margin-top: 16px;
-  /* display: flex; */
-  width: 100%;
+    margin-top: 0.25em auto;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 .navbar a {
-  text-decoration: none;
-  padding: 0;
-  color: #1557ff;
-  /* margin-right: 15px; */
+    text-decoration: none;
+    padding: 0;
+    color: #5F73B8;
 }
 
-.navbar a:hover,
-.navbar .current-page {
-  border-bottom: solid 4px #1557ff;
-  border-spacing: 0 15px;
-  font-weight: bold;
+.navbar a:hover {
+    border-bottom: solid 4px #5F73B8;
+    font-weight: bold;
 }
 
 .title {
-  font-size: 3em;
-  padding: 0px 50px 0 20px;
-  margin: auto 0;
-  color: #3a10e5;
+    font-size: 3em;
+    padding: 0px 50px 0 20px;
+    margin: auto 0;
+    color: #3a10e5;
 }
 
 .app {
-  /* min-width: 800px;*/
-  max-width: 500px;
-  margin: 1em auto;
-  padding: 1em 0;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+    background-color: #FFF;
+    max-width: 500px;
+    margin: 1em auto;
+    padding: 1em 0;
+    border-radius: 18px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
-.actionpanel {
+.actionpanel, .logout {
     max-width: 40%;
     margin: 1em auto 1em;
 }
-.actionpanel a {
+.actionpanel a, .logout a {
     display: inherit;
     text-align: center;
     border-radius: 10px;
@@ -87,41 +72,39 @@ header {
     color: #FFF;
     padding: 5px;
     margin-bottom: 0.5em;
-    background-color: #1B78FF;
+    background-color: #5F73B8;
+}
+
+.actionpanel a:hover, .tinybutton a:hover, .logout a:hover {
+    background-color: #999
 }
 
 ul {
-  list-style: none;
+    list-style: none;
 }
 
 .line-table li {
-  width: 2em;
-  height: 2em;
-  text-align: center;
-  line-height: 2em;
-  border-radius: 1em;
-  background: dodgerblue;
-  margin: 0 1em;
-  display: inline-block;
-  color: white;
-  position: relative;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    border-radius: 1em;
+    background: dodgerblue;
+    margin: 0 1em;
+    display: inline-block;
+    color: white;
+    position: relative;
 }
 
-table.line-table{
+table.line-table, table.button-table {
     margin-left: auto;
     margin-right: auto;
 }
 
-/* .line-table li::before {
-  content: "";
-  position: absolute;
-  top: 0.9em;
-  left: -4em;
-  width: 4em;
-  height: 0.2em;
-  background: dodgerblue;
-  z-index: -1;
-} */
+.line-table th, .button-table th {
+    padding: 0 32px 0 0;
+    text-align: left;
+}
 
 /* li + div {
   display: none;
@@ -154,9 +137,31 @@ li:hover {
 thead {
     text-decoration: underline;
 }
-.line-table td, .line-table th {
+.line-table td, .line-table th,
+.button-table td, .button-table th {
     text-align: left;
 }
 .total tr {
     font-weight: bolder;
+}
+h3 {
+    margin: 0.25em auto;
+}
+
+
+.button-table td {
+    padding: 6px 1px;
+}
+
+td.tinybutton {
+    padding-left: 0.5em;
+}
+
+.tinybutton a {
+    text-decoration: none;
+    border-radius: 6px;
+    color: #FFF;
+    padding:2px 2px 3px 2px;
+    background-color: #5F73B8;
+    margin-bottom: 6px;
 }
