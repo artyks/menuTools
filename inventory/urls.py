@@ -8,7 +8,7 @@ urlpatterns = [
     path('balancesheet', views.BalanceSheet.as_view(), name='balancesheet'),
     path('menu', views.Menu.as_view(), name='menu'),
     path('inventory', views.Inventory.as_view(), name='inventory'),
-    path('purchases', views.Purchases.as_view(), name='purchases'),
+    path('purchases/', views.Purchases.as_view(), name='purchases'),
     #===paths for views that edit/create ITEMS
     path('add_menu_item', views.CreateMenuItem.as_view(), name='add_menu_item'),
     path('add_ingredient', views.CreateIngredient.as_view(), name='add_ingredient'),
